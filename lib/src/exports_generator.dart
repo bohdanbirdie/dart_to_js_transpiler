@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'decorators.dart';
-
-// import 'utils.dart';
 
 const _entrypointChecker = TypeChecker.fromRuntime(Entrypoint);
 final emitter = DartEmitter();
@@ -26,7 +22,6 @@ class ExportsGenerator extends Generator {
   @override
   String generate(LibraryReader library, BuildStep buildStep) {
     var importDirectives = new List<Directive>();
-    print("EXPORT: ${this.a.keys}");
 
     var annotated = library.allElements.where((element) {
       return _entrypointChecker.firstAnnotationOf(element) != null;
@@ -79,9 +74,6 @@ class ExportsGenerator extends Generator {
     var lib = new Library((b) => b
       ..directives.addAll(importDirectives)
       ..body.add(main));
-
-    // var elem = this.a['defaultConstructorName'] as Map;
-    // var element = elem['element'] as Element;
 
     return lib.accept(emitter).toString();
   }

@@ -30,5 +30,3 @@ builders:
     build_extensions: {".dart": [".js"]}
     auto_apply: dependents
     build_to: source
-    # runs_before: ["dart_to_js_transpiler|exports"]
-    # applies_builders: ["source_gen|combining_builder"]

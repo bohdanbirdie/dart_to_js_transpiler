@@ -7,16 +7,8 @@ import 'package:source_gen/source_gen.dart';
 
 import 'decorators.dart';
 
-// import 'utils.dart';
-
 const _entrypointChecker = TypeChecker.fromRuntime(Entrypoint);
 final emitter = DartEmitter();
-
-// String node_interop = 'package:node_interop/node.dart';
-// final setExport = refer('setExport', node_interop);
-
-// String js_lib = 'package:js/js.dart';
-// final allowInterop = refer('allowInterop', js_lib);
 
 class SchemaGenerator extends Generator {
   Map<String, Map<String, dynamic>> a;
@@ -25,7 +17,6 @@ class SchemaGenerator extends Generator {
 
   @override
   String generate(LibraryReader library, BuildStep buildStep) {
-    print("SCHEMA: ${this.a.keys}");
     var importDirectives = new List<Directive>();
 
     var annotated = library.allElements.where((element) {

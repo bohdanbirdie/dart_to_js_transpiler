@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:code_builder/code_builder.dart';
@@ -25,7 +24,6 @@ class ExposeGenerator extends GeneratorForAnnotation<ExposeClass> {
   FutureOr<String> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) {
     String result = "";
-    print("expose: ${element}");
 
     bool isClass = element.kind == ElementKind.CLASS;
     if (isClass) {
