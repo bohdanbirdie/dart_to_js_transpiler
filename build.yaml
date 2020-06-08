@@ -1,0 +1,34 @@
+targets:
+  $default:
+    builders:
+      dart_to_js_transpiler|exposer|exports|schema:
+        enabled: true
+
+builders:
+  exposer:
+    target: ":dart_to_js_transpiler"
+    import: "package:dart_to_js_transpiler/builder.dart"
+    builder_factories: ["exposer"]
+    build_extensions: {".dart": [".exposer.g.part"]}
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
+    runs_before: ["dart_to_js_transpiler|exports"]
+
+  exports:
+    target: ":dart_to_js_transpiler"
+    import: "package:dart_to_js_transpiler/builder.dart"
+    builder_factories: ["exports"]
+    build_extensions: {".dart": [".js.dart"]}
+    auto_apply: dependents
+    build_to: source
+
+  schema:
+    target: ":dart_to_js_transpiler"
+    import: "package:dart_to_js_transpiler/builder.dart"
+    builder_factories: ["schema"]
+    build_extensions: {".dart": [".js"]}
+    auto_apply: dependents
+    build_to: source
+    # runs_before: ["dart_to_js_transpiler|exports"]
+    # applies_builders: ["source_gen|combining_builder"]
